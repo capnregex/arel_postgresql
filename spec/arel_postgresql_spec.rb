@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'spec_helper'
 
 class ArelPostgresql::Test < ActiveSupport::TestCase
   test "truth" do
