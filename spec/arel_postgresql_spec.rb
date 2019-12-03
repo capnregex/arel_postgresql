@@ -1,5 +1,5 @@
-class ArelPostgresql::Test < ActiveSupport::TestCase
-  test "truth" do
-    assert_kind_of Module, ArelPostgresql
+Rspec.describe ArelPostgresql do
+  it "is a module" do
+    expect(described_class).to be_a(Module)
   end
 end

@@ -21,6 +21,18 @@ Or install it yourself as:
 $ gem install arel_postgresql
 ```
 
+## Development 
+
+### Configuring Postgresql DB
+
+Taken from [Ubuntu Community Help PostgreSQL Alternative Setup](https://help.ubuntu.com/community/PostgreSQL#Alternative_Server_Setup)
+```bash
+sudo -u postgres createuser --superuser $USER
+sudo -u postgres createdb $USER
+bundle
+rake db:create
+```
+
 ## Contributing
 Contribution directions go here.
 

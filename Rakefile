@@ -24,4 +24,7 @@ Rake::TestTask.new(:test) do |t|
   t.verbose = false
 end
 
+require_relative 'dummy/config/application'
+Rails.application.load_tasks
+
 task default: :test
