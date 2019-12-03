@@ -1,20 +1,23 @@
-# Configure Rails Environment
-ENV["RAILS_ENV"] = "test"
+# See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+RSpec.configure do |config|
+  config.expect_with :rspec do |expectations|
+    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
 
-require_relative "../test/dummy/config/environment"
-ActiveRecord::Migrator.migrations_paths = [File.expand_path("../test/dummy/db/migrate", __dir__)]
-require "rails/test_help"
+  config.mock_with :rspec do |mocks|
+    mocks.verify_partial_doubles = true
+  end
 
-# Filter out the backtrace from minitest while preserving the one from other libraries.
-Minitest.backtrace_filter = Minitest::BacktraceFilter.new
+  config.shared_context_metadata_behavior = :apply_to_host_groups
+  config.filter_run_when_matching :focus
+  config.example_status_persistence_file_path = "spec/examples.txt"
+  config.disable_monkey_patching!
 
-require "rails/test_unit/reporter"
-Rails::TestUnitReporter.executable = 'bin/test'
+  if config.files_to_run.one?
+    config.default_formatter = "doc"
+  end
 
-# Load fixtures from the engine
-if ActiveSupport::TestCase.respond_to?(:fixture_path=)
-  ActiveSupport::TestCase.fixture_path = File.expand_path("fixtures", __dir__)
-  ActionDispatch::IntegrationTest.fixture_path = ActiveSupport::TestCase.fixture_path
-  ActiveSupport::TestCase.file_fixture_path = ActiveSupport::TestCase.fixture_path + "/files"
-  ActiveSupport::TestCase.fixtures :all
+  config.profile_examples = 10
+  config.order = :random
+  Kernel.srand config.seed
 end
